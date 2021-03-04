@@ -157,6 +157,139 @@ $ cd projectName
 $ git init
 ```
 
+## Connecting our bot application to Discord.
+Ok, finally it's time to start writing some code!
+
+The first thing we can do is create a new file called `index.js`.  This is now going to serve as the primary code for our bot.  Inside `index.js` we are going to paste the following code snippet (don't worry, we will go through it line by line right after!):
+
+```javascript
+const Discord = require('discord.js');
+const client = new Discord.Client();
+
+client.login('your-token-goes-here');
+
+client.once('ready', () => {
+	console.log('Ready!');
+});
+```
+
+This code snippet will import `discord.js` and create a new `Discord.Client` object (which we have called `client`).  We are then going to call two methods that `client` contains.  The first (`client.login()`) will use our secret token to log into Discord.  The second (`client.once()`) will wait until a certain condition is met (in this case the client is ready) and then log a message to the console. 
+
+There are two problems with this snippet!  Can you spot them?
+
+The first is that we don't haven't isntalled `discord.js` yet.  This is an easy fix.  Just run the following command:
+```bash
+$ npm install discord.js
+```
+
+This will install `discord.js` and all of its depdencies.  If you run `$ npm list` you should see something like this:
+```bash
+decode-crash-course-in-node@ /home/jim/dev/decode-crash-course-in-node
+└── discord.js@12.5.1
+```
+
+The next problem is that we haven't told our bot what our secret token is!  Let's take a second to do this right so that we don't accidentally share this with the world.  
+
+Create another file called `config.json`.  A `.json` file, also called a JavaScript Object Notation file, is a convinient way to store configuration data for our application.  We will use it to store our private token and then tell git to ignore this file so we don't accidentally push it to a public report.  Git has a handy feature for this.  Create a file named '.gitignore' and add the line 'config.json' to it.  Git will no longer track this file.
+
+Anyways, back to `config.json`!  Copy and paste the following code snippet into `config.json`:
+```json
+{
+    "key":"<YOUR KEY HERE!>"
+}
+```
+Make sure to paste your key in between the quotations. 
+
+Now, in index.js we can import this config file with by adding this line to the top: 
+```javascript
+const config = require('./config.json')
+```
+We can access the key now with `config.key`.
+
+After updating our `index.js` it should look like this:
+```javascript
+const config = require('./config.json') // this line is new
+const Discord = require('discord.js');
+const client = new Discord.Client();
+
+client.login(config.key); // config.key is our private token!
+
+client.once('ready', () => {
+	console.log('Ready!');
+})
+```
+
+## Starting our bot server
+Ok, at this point we have all the pieces in place to connect our bot application to discord!  
+
+Let's start our server:
+```bash
+$ nodemon --inspect index.js
+```
+
+If everything is succesful you will see a message like this:
+
+```bash
+jim@xps:~/dev/decode-crash-course-in-node$ nodemon --inspect index.js
+[nodemon] 2.0.7
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `node --inspect index.js`
+Debugger listening on ws://127.0.0.1:9229/2356aded-61cd-4ce1-83ef-f2bfeecfe70f
+For help, see: https://nodejs.org/en/docs/inspector
+Ready!
+```
+If you see that 'Ready!' message at the end, your application successfully connected to the Discord API.  Nice job!
+
+## Adding the bot to a Discord server.
+This part is a little odd.  I haven't worked out a way to have several people add an army of bots to the Decode Discord server without causing lots of ping spam for other members.  I will cover how to create your own test server and add the bot during the presentation.  If you're reading this after the fact, you can follow the instructions [here](https://discordjs.guide/preparations/adding-your-bot-to-servers.html#adding-your-bot-to-servers)
+
+## Chatting with our bot
+Ok, let's recap.  We now have a server running on our local machine.  On that server is an application which is connected to the Discord API.  That application's bot account is now present in your test Discord's Member List.  It's time to add some interactivity to our bot!
+
+Assumming you gave it the proper permissions your bot can read messages as they are sent on your server.  The most common way to tell the bot that a message is meant for it is to have some kind of command prefix.  I recomend `?`, `!`, or `$`.  `/` is reserved by Discord.  So a command in chat might look something like `!ping`.
+
+First, we can add our command prefix to the config file:
+```json
+{
+    "key":"you-private-key",
+    "commandPrefix":"!"
+}
+```
+
+Now we need to tell the bot to list for messages.  This is typically handled like this:
+
+```javascript
+client.on('message', message => {
+    // handle the message
+	console.log(`This message was sent on the server: '${message.content}' from ${message.author}`);
+});
+```
+
+If we leave it as such we will end up handling every message that is sent to the console:
+```
+This message was sent on the server: 'test' from <@xxxxxx>
+This message was sent on the server: 'hello!' from <@xxxxxx>
+This message was sent on the server: 'what's up' from <@xxxxxx>
+```
+
+Let's integrate our command prefix so we handle messages specifically for the bot.  Let's add the commands `!hello` and `!goodbye`
+```javascript
+client.on('message', message => {
+    // handle the message
+	if (message.content.startsWith(`${config.commandPrefix}hello`)) {
+	    message.channel.send(`Howdy, ${message.author}!`);
+    } else if (message.content.startsWith(`${config.commandPrefix}goodbye`)) {
+	message.channel.send(`Cya later, ${message.author}`);
+    }
+});
+```
+
+## To be continued...
+I will be seriously impressed if we made it this far in a one hour presentation!  If you've made it this far that means you have a working Discord bot.  You can find examples of what your `index.js` and `config.json` should look like in this repo.
+
+During part 2 or 3 of our foray into node.js we will try to our bots up to some other API and maybe get them running on servers in the cloud.  
 
 
 
