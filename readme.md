@@ -10,13 +10,13 @@ This presentation has been written in a guide format so that you can follow alon
 
 ## Resources 
 Here are some helpful links that will assist you with this project:
--[node.js](https://nodejs.org/en/)
--[node package manager](https://www.npmjs.com/)
--[nodemon](https://nodemon.io/)
--[discord.js](https://discord.js.org/?source=post_page---------------------------#/)
--[discord.js guide](https://discordjs.guide/)
--[discord developer portal](https://discord.com/developers/applications)
--[git](https://git-scm.com/)
+- [node.js](https://nodejs.org/en/)
+- [node package manager](https://www.npmjs.com/)
+- [nodemon](https://nodemon.io/)
+- [discord.js](https://discord.js.org/?source=post_page---------------------------#/)
+- [discord.js guide](https://discordjs.guide/)
+- [discord developer portal](https://discord.com/developers/applications)
+- [git](https://git-scm.com/)
 
 You will need a text-editor to complete this.  I recommend (vscode)[https://code.visualstudio.com/]
 
