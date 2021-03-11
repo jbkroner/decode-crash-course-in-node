@@ -1,5 +1,5 @@
 # Decode @ UWM: A Crash Course in Node.js!
-Welcome!  If you're reading this you are probably a member of Decode @ UWM.  Today we are going to learn about a JavaScript framework that powers applications all over the world: [Node.js!](https://nodejs.org/en/) Then we will use our knew knowledge to build a simple Discord chat bot. 
+Welcome!  If you're reading this you are probably a member of Decode @ UWM.  Today we are going to learn about a JavaScript framework that powers applications all over the world: [Node.js!](https://nodejs.org/en/) Then we will use our new knowledge to build a simple Discord chat bot. 
 
 By the end of this guide you can expect to have learned the following:
 - The basics of the client-server architecture 
