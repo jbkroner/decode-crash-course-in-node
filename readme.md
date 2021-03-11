@@ -18,7 +18,7 @@ Here are some helpful links that will assist you with this project:
 - [discord developer portal](https://discord.com/developers/applications)
 - [git](https://git-scm.com/)
 
-You will need a text-editor to complete this.  I recommend (vscode)[https://code.visualstudio.com/]
+You will need a text-editor to complete this.  I recommend [vscode](https://code.visualstudio.com/)
 
 
 
