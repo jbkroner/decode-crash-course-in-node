@@ -98,17 +98,17 @@ For help, see: https://nodejs.org/en/docs/inspector
 Hello, World
 [nodemon] clean exit - waiting for changes before restart
 ```
-Down at the bottom you can see that our message was logged to the servers console.  This means that our Node enviroment is working as we can start building!
+Down at the bottom you can see that our message was logged to the servers console.  This means that our Node enviroment is working and we can start building!
 
 
 ## Micro-project: Discord Chat Bot!
-We are going to use our new knowledge about node and servers to build our first node app:  A chat bot for the social messaing service [discord](https://discord.com/).  Chances are I'm presenting this to you right now on Discord right now!
+We are going to use our new knowledge about node and servers to build our first node app:  A chat bot for the social messaing service [discord](https://discord.com/).  Chances are I'm presenting this to you on Discord right now!
 
 The neat thing about Discord is that it has an API that we access.  The API lets us access all sorts of information about a Discord server like the users that are online, the messages being sent, etc.  We can also use the API to send messages on a Discord server from our node bot.  Let's create a bot that can respond to messages on our club server. 
 
 This makes our 'client - server' model a little more complicated.  Now it's going to look something like this:
 
-We (the client) will send a message on Discord.  Discord will then automatically send this message to our bot (or rather, our bot will read messages sent on our server using the Discord API).  If the message contains a keyword the bot will use the Discord API to send a reply!.
+We (the client) will send a message on Discord.  Discord will then automatically send this message to our bot (or rather, our bot will read messages sent on our server using the Discord API).  If the message contains a keyword the bot will use the Discord API to send a reply!
 
 It's quite laborious to manually handle every single API endpoint we need from Discord.  That's where Node comes in to save the day!  There is a Node package called Discord.js that will make this a lot easier.  Discord.js handles all the detailed API calls.  We can write some simple, high-level JavaScript to define our bot's behavior. 
 
@@ -190,7 +190,7 @@ decode-crash-course-in-node@ /home/jim/dev/decode-crash-course-in-node
 
 The next problem is that we haven't told our bot what our secret token is!  Let's take a second to do this right so that we don't accidentally share this with the world.  
 
-Create another file called `config.json`.  A `.json` file, also called a JavaScript Object Notation file, is a convinient way to store configuration data for our application.  We will use it to store our private token and then tell git to ignore this file so we don't accidentally push it to a public report.  Git has a handy feature for this.  Create a file named '.gitignore' and add the line 'config.json' to it.  Git will no longer track this file.
+Create another file called `config.json`.  A `.json` file, also called a JavaScript Object Notation file, is a convinient way to store configuration data for our application.  We will use it to store our private token and then tell git to ignore this file so we don't accidentally push it to a public repo.  Git has a handy feature for this.  Create a file named '.gitignore' and add the line 'config.json' to it.  Git will no longer track this file.
 
 Anyways, back to `config.json`!  Copy and paste the following code snippet into `config.json`:
 ```json
